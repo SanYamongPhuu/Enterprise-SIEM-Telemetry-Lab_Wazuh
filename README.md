@@ -27,7 +27,7 @@ The environment utilizes a hybrid setup to simulate real-world Security Operatio
 
 ## 📂 Repository Structure
 
-* **`docs/`** — Network topology diagrams, architectural notes, and dashboard visualization screenshots.
+* **`docs/`** — Architectural topology flowcharts and telemetry pipeline documentation.
 * **`rules/`** — Custom XML Decoders and Wazuh rules (`local_rules.xml`) developed for application-level threat detection.
 * **`queries/`** — Production-ready KQL (Kusto Query Language) and ES|QL queries for forensic investigations and threat hunting.
 
