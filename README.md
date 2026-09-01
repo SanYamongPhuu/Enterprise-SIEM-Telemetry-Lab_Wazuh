@@ -1,55 +1,58 @@
-Project: Cybersecurity SIEM & Threat Hunting Lab
+# Cybersecurity SIEM & Threat Hunting Lab 🛡️
+### Centralized Log Telemetry, Custom Detection & Incident Response
+
+Project: Cybersecurity SIEM & Threat Hunting Lab 
 Platform: Wazuh & Microsoft Sentinel
 
-Focus: Enterprise Log Analysis & Incident Response
+![Wazuh](https://img.shields.io/badge/SIEM-Wazuh-blue)
+![Sentinel](https://img.shields.io/badge/Cloud-Microsoft%20Sentinel-azure)
+![KQL](https://img.shields.io/badge/Language-KQL%20%2F%20XML-orange)
+![Security](https://img.shields.io/badge/Focus-Threat%20Hunting-red)
 
-📝 Project Overview
-This repository documents a high-fidelity SIEM (Security Information and Event Management) environment engineered to monitor, detect, and analyze security events across distributed infrastructures. The lab specifically focuses on ingesting and decoding telemetry from Windows Sysmon, IIS Web Servers, and SQL Server ERRORLOGs. 
+---
 
-🏗️ Lab Architecture
-The environment utilizes a hybrid-cloud model to simulate modern enterprise security operations:
+## 📝 Project Overview
+This repository documents a high-fidelity SIEM (Security Information and Event Management) environment engineered to monitor, detect, and analyze security events across distributed enterprise infrastructure. The lab specifically focuses on ingesting, decoding, and correlating telemetry from **Windows Sysmon**, **IIS Web Servers**, and **SQL Server ERRORLOGs**.
 
-Endpoints: Windows Server instances configured with Sysmon for deep process and network visibility.
+---
 
+## 🏗️ Lab Architecture
+The environment utilizes a hybrid setup to simulate real-world Security Operations Center (SOC) workflows:
 
-Management: Wazuh serves as the central log collector and manager, utilizing specialized agents for real-time telemetry. 
+* **Endpoints:** Windows Server instances configured with **Sysmon** for process execution and network connection visibility.
+* **Log Aggregation:** **Wazuh Manager** serves as the central log collector, deploying lightweight agents for real-time telemetry streaming and File Integrity Monitoring (FIM).
+* **Advanced Analytics:** **Microsoft Sentinel** integration enables cloud-native threat hunting, long-term retention, and complex event correlation using Kusto Query Language.
 
+---
 
-Analysis: Microsoft Sentinel is integrated for advanced threat hunting, long-term data retention, and complex event correlation. 
+## 📂 Repository Structure
 
-📂 Repository Structure
+* **`docs/`** — Network topology diagrams, architectural notes, and dashboard visualization screenshots.
+* **`rules/`** — Custom XML Decoders and Wazuh rules (`local_rules.xml`) developed for application-level threat detection.
+* **`queries/`** — Production-ready KQL (Kusto Query Language) and ES|QL queries for forensic investigations and threat hunting.
 
-/docs: Contains network topology diagrams and screenshots of operational dashboards demonstrating successful log ingestion. 
+---
 
+## 🔍 Threat Detection & Hunting Use Cases
 
-/rules: Houses custom XML Decoders and Wazuh Rules developed to identify specific patterns in application-level logs. 
+### 1. SQL Server Authentication Anomalies & Brute Force
+* **Detection Logic:** A custom Wazuh XML rule triggers an alert upon detecting more than **5 failed login attempts within a 60-second window** in the MS SQL Server `ERRORLOG`.
+* **Telemetry Source:** Ingested SQL Server log stream mapped to custom alert severity levels.
 
+### 2. IIS Unauthorized Web Access Patterns
+* **Detection Logic:** Parsing IIS Web Server access logs for suspicious HTTP response codes (e.g., `401`, `403`, `404`) indicating automated scanning or directory traversal attempts.
+* **Forensic Investigation:** Utilizing KQL queries in Sentinel to correlate source IPs, User-Agent strings, and attack patterns.
 
-/queries: A library of KQL (Kusto Query Language) queries used for proactive threat hunting and forensic investigation. 
+---
 
-🔍 Threat Detection Use Cases
-1. SQL Server Brute Force Detection
+## 🛠️ Tools & Technologies Used
+* **SIEM / Telemetry Platforms:** Wazuh SIEM, Microsoft Sentinel, Elastic Stack (ES|QL)
+* **Log Sources:** Windows Security Event Logs, Sysmon, IIS Access Logs, SQL Server ERRORLOGs
+* **Languages & Parsing:** KQL (Kusto Query Language), XML Decoders, PowerShell, SQL
 
-Logic: A custom Wazuh rule triggers an alert upon detecting more than five failed login attempts within a 60-second window in the SQL Server ERRORLOG. 
+---
 
-Detection: Captured via automated alerting and visualized in the Wazuh dashboard.
-
-2. IIS Unauthorized Access Patterns
-
-Logic: Analyzing IIS Web Server logs for unusual HTTP status codes (e.g., 403, 404) that may indicate directory traversal or automated scanning. 
-
-
-Investigation: Utilizing KQL in Sentinel to correlate IP addresses with known malicious actors. 
-
-🚀 Technical Skills Demonstrated
-
-Security Orchestration: Configuration of SIEM agents and managers in a multi-platform environment. 
-
-
-Log Engineering: Authoring custom XML decoders for non-standard log formats. 
-
-
-Threat Hunting: Writing complex KQL queries to identify lateral movement and persistence. 
-
-
-Systems Administration: Managing Windows Server security policies and Sysmon configurations.
+## 🚀 Technical Capabilities Demonstrated
+* **Security Orchestration:** Configured multi-platform SIEM agents and telemetry collection pipelines.
+* **Detection Engineering:** Authored custom decoders and alert rules for unstructured/non-standard logs.
+* **Proactive Threat Hunting:** Executed complex KQL queries to identify lateral movement and persistence mechanisms.
