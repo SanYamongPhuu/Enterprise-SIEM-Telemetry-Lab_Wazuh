@@ -1,0 +1,5 @@
+// IIS Failed Access Hunting Query
+W3CIISLog
+| where ScStatus in (401, 403, 404)
+| summarize FailedRequests = count() by cIP, csMethod, csUriStem
+| sort by FailedRequests desc
